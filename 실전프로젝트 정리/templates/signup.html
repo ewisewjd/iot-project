@@ -1,0 +1,51 @@
+{% extends "frm_body.html" %}
+{% block head %}
+{{ super() }}
+{% endblock %}  
+{% block wrap %}
+<div class="signup_wrap">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:window.close();window.open('/');">로그인</a></li> 
+        <li class="breadcrumb-item">회원가입</li>
+    </ol>
+    <div>
+        <h2 class="center">회원 가입</h2>
+    </div>
+    <div class="signup_form">
+    <form name="signup" method="post" action="/signup/result" autocomplete="off">
+        <div id="signup_input">
+            <div class="form-floating mb-3" id="M_NAME">
+                <input type="text" class="form-control" name="M_NAME" minlength="2" maxlength="10" placeholder="이름" autocomplete="off">
+                <label for="M_NAME">이름</label>
+                <div class="feedback"></div>
+            </div>
+            <div class="form-floating input-group mb-3" id="M_ID">
+                <input type="text" name="M_ID" class="form-control" placeholder="아이디" minlength="6" maxlength="15" aria-label="아이디" aria-describedby="button-addon2" autocomplete="off">
+                <label for="M_ID">아이디</label>
+                <button class="btn btn-secondary" type="button" onclick="confirm_id();" >중복확인</button>
+                <input type="hidden" value="" name="id_confirm" minlength="6" maxlength="15">
+                <div class="feedback"></div>
+            </div>
+            <div class="form-floating mb-3" id="M_PW">
+                <input type="password" class="form-control" name="M_PW" minlength="8" maxlength="15" autocomplete="off" placeholder="비밀번호">
+                <label for="M_PW">비밀번호</label>
+                <div class="feedback"></div>
+            </div>
+            <div class="form-floating mb-3" id="mpw_confirm">
+                <input type="password" class="form-control" name="mpw_confirm" minlength="8" maxlength="15"  autocomplete="off" placeholder="비밀번호 확인">
+                <label for="mpw_confirm" >비밀번호 확인</label>
+                <div class="feedback"></div>
+            </div>
+            <div class="form-floating mb-3" id="M_TEL">
+                <input type="tel" class="form-control" name="M_TEL" minlength="12" maxlength="13" autocomplete="off">
+                <label for="M_TEL" >휴대폰 번호</label>
+                <div class="feedback"></div>
+            </div>
+        </div>
+        <div class="d-grid gap-2">
+            <button class="btn btn-lg btn-primary" type="button" onclick="checkSignupForm();">회원 가입</button>
+        </div>
+    </form>
+    </div>
+    </div>
+{% endblock %}

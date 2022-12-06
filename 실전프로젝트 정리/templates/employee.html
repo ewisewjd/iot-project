@@ -1,0 +1,82 @@
+{% extends "frm_body.html" %}
+{% block title %}직원{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block wrap %}
+{% include 'frm_header.html' ignore missing%}
+<div>
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item white"><a href="/">홈</a></li>
+      <li class="breadcrumb-item white"><a href="#">직원</a></li>
+  </ol>
+</div>
+  <div class="content">
+    <div class="title_wrap">
+      <div class="title_parent">
+        <div class="first"><img src="../static/img/manager.png" class="left_right_trans"></div><div class="second"><h2 class="text-primary">직원 정보</h2></div><div class="third"><img src="../static/img/manager.png"></div>
+      </div>
+      <div class="title_info">
+        <h5>직원 목록 조회</h5>
+      </div>
+    </div>
+      <div class="employee_list">
+      <div>
+            <div class="employee_search">
+                <select name="search_selector">
+                    <option value="a" selected>전체</option>
+                    <option value="t">이름</option>
+                    <option value="w">업무</option>
+                    <option value="c">번호</option>   
+                </select>
+                {% if search == '' %}
+                <input type="text" minlength="2" value="" name="search_keyword" maxlength="20" onkeypress="if (event.keyCode == 13){search()}" placeholder="검색어">
+                {% else %}
+                <input type="text" minlength="2" value="{{ search }}" name="search_keyword" maxlength="20" onkeypress="if (event.keyCode == 13){search()}" placeholder="검색어">
+                {% endif %}
+                <input type="button" value="검색" onclick="search()">
+            </div>
+          </div>
+            <div class="employee_info">
+                <table class="table table-hover">
+                    <thead style="text-align:center;">
+                      <tr>
+                        <th scope="col">번호</th>
+                        <th scope="col">이름</th>
+                        <th scope="col">직급</th>
+                        <th scope="col">업무</th>
+                        <th scope="col">추종 로봇</th>
+                        <th scope="col">연락처</th>
+                        <th scope="col">등록일</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {%if info_list|length == 0 %}
+                      <tr>
+                        <td colspan="7">등록된 직원이 없습니다.</td>
+                      </tr>
+                      {% else %}
+                        {% for info in info_list %}
+                      <tr class="table-active" style="cursor:pointer;"onclick="location.href='/employee/e{{ info[0] }}'">
+                        <td scope="row">{{ info[1] }}</td>
+                        <td class="title_hover">{{ info[2] }}</td>
+                        <td>{{ info[3] }}</td>
+                        <td>{{ info[4] }}</td>
+                        <td>{{ info[5] }}</td>
+                      </tr>
+                      {% endfor %}
+                      {% endif %}
+                    </tbody>
+                  </table>
+            
+            <div class="employee_write_btn">
+                <a class="btn btn-success" href="/employee/regist">등록</a>
+            </div>
+          </div>
+        </div>
+        <div class="employee_page">
+        {% include 'paging.html' ignore missing %}
+        </div>
+      </div>
+{% include 'frm_footer.html' ignore missing%}
+{% endblock %}

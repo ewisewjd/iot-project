@@ -1,0 +1,80 @@
+{% extends "frm_body.html" %}
+
+{% block title %}
+  {{ warehouse_robot["what"]}}
+{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block wrap %}
+{% include 'frm_header.html' ignore missing%}
+<div>
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item white"><a href="/">홈</a></li>
+      <li class="breadcrumb-item white"><a href="#">{{warehouse_robot["what"]}}</a></li>
+  </ol>
+</div>
+<div class="content">
+    <div class="title_wrap">
+      <div class="title_parent">
+          <div class="first">
+            <img src="../static/img/{{warehouse_robot['image']}}" class="left_right_trans">
+          </div>
+          <div class="second">
+            <h2 class="text-primary">{{warehouse_robot["what"]}}</h2>
+          </div>
+          <div class="third">
+            <img src="../static/img/{{warehouse_robot['image']}}">
+          </div>
+      </div>
+      <div class="title_info">
+        <h5>물류 로봇의 정확한 위치 파악 및 통합 관리를 위한 시스템</h5>
+        <span class="text-muted">-Sprit of <b><i>봇통령</i></b></span>
+      </div>
+    </div>
+  <div class="mypage_cage">
+    {%if warehouse_robot["what"] == "창고" %}
+      {%if warehouse_robot["list"]|length == 0 %}
+        등록된 창고가 존재하지 않습니다.
+      {% else %}
+        {% for warehouse in warehouse_robot["list"] %}
+          <div class="card mb-3 cage" onclick="location.href='/warehouse/w_{{warehouse[0]}}'">
+            <h3 class="card-header">{{warehouse[0]}}</h3>
+            <div class="intro_img">
+              <img src="../static/img/{{warehouse[1]}}" alt="창고 설계 도면 사진">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{warehouse[2]}}</h5>
+              <h6 class="card-subtitle text-muted">{{warehouse[3]}}</h6>
+            </div>
+            <div class="card-footer text-muted">
+              창고 정보 : {{warehouse[4]}}
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% elif warehouse_robot["what"] == "로봇" %}
+      {%if warehouse_robot["list"]|length == 0 %}
+        등록된 물류 로봇이 존재하지 않습니다.
+      {% else %}
+        {% for robot in warehouse_robot["list"] %}
+          <div class="card mb-3 cage" onclick="location.href='/robot/{{robot[2]}}'">
+            <h3 class="card-header">{{robot[0]}}</h3>
+            <div class="intro_img">
+              <img src="../static/img/{{robot[1]}}" alt="{{robot[2]}} 사진">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{robot[2]}}</h5>
+              <h6 class="card-subtitle text-muted">{{robot[3]}}</h6>
+            </div>
+            <div class="card-footer text-muted">
+              로봇 정보 : {{robot[4]}}
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endif %}
+  </div>
+</div>
+{% include 'frm_footer.html' ignore missing%}
+{% endblock %}

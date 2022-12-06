@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> DCT | {% block title %}{{ title }}{% endblock %}</title>    
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css" >
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap.css" >
+    <link rel="stylesheet" type="text/css" href="/static/footer.css" >
+    <link rel="stylesheet" type="text/css" href="/static/common.css" >
+    <script src="/static/common.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/bootstrap.bundle.min.js"></script>
+    <script src="/static/prism.js"></script>
+    <script src="/static/sweetalert.min.js"></script>
+    <!-- <script src="/static/custom.js"></script> -->
+
+    {% block src %}{% endblock %}
+    {% endblock %}
+</head>
+
+<!-- <body onload="window.self.focus();"> -->
+<body>
+    <input type="hidden" value= "{{info}}"  name="info">
+
+    <div class="wrap">
+    {% block wrap %}{% endblock %}
+    {% block footer %}{% endblock %}
+    </div>
+    <script>
+    $(document).ready(() => {
+      $(".nav-link").removeClass('active');
+      let pageSrc = document.location.href;
+      let navLinks = $('.nav-link')
+      $.each(navLinks, function(index, item){
+        let LinkSrc = $(this).attr('href');
+        if (pageSrc.endsWith(LinkSrc)){
+          $(this).addClass('active');
+        }
+      })
+    });
+    // let loc1 = location.href.split('/').slice(3,5);
+    // if(loc1 == ["login"].toString()){
+    //    checkLoginForm();
+    // }
+
+    </script>
+</body>
+</html>

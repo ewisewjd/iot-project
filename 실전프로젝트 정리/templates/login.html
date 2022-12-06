@@ -1,0 +1,49 @@
+{% extends "frm_body.html" %}
+{% block head %}
+{% block src %}
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
+{% endblock %}
+{{ super() }}
+{% endblock %}
+{% block wrap %}
+<div>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">DCT</li>
+</ol>
+</div>
+<div class="login_div">
+    <a href="javascript:window.close();window.open('/login');"><h1>로그인</h1></a>
+          <div class="form-group login_form">
+            <form action="/login/result" method="post" name="login" autocomplete="off">
+                <div class="form-floating mb-3" id="M_ID">
+                    <input type="text" class="form-control" maxlength="15" minlength="6" name="M_ID" autocomplete="off">
+                    <label for="M_ID">아이디</label>
+                    <div class="feedback"></div>
+                </div>
+                <div class="form-floating mb-3" id="M_PW">
+                    <input type="password" class="form-control" minlength="8" maxlength="15" name="M_PW" autocomplete="off">
+                    <label for="M_PW">비밀번호</label>
+                    <div class="feedback"></div>
+                </div>
+            </form>
+            <div class="d-grid gap-2">
+                <button class="btn btn-lg btn-primary" type="button" onclick="checkLoginForm();">로그인</button>
+            </div>
+          </div>
+<div class="login_ext_div">
+    <button type="button" class="btn btn-outline-light btn-find" onclick="location.href='#'">비밀번호 찾기</button>
+    <button type="button" class="btn btn-outline-light" onclick="location.href='#'">아이디 찾기</button>
+    <button type="button" class="btn btn-outline-warning btn-signup" onclick="location.replace('/signup');">회원가입</button>
+</div>
+</div>
+<script>
+    $(document).on('keyup', function(key){
+        if(key.keyCode==13) {
+            checkLoginForm();
+        }
+    });
+</script>
+{% endblock %}

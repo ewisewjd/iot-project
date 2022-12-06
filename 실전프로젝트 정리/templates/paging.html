@@ -1,0 +1,17 @@
+<div class="commu_paging">
+   <ul>
+      {% for page in paging %}
+      <li>
+         {% if page == '<' %}
+            <a href = "/community/free/{{sort_by}}/n{{paging[1]-5}}">
+         {% elif page == '>' %}
+            <a href = "/community/free/{{sort_by}}/n{{paging[1]+5}}">
+         {% else %}
+            <a href = "/community/free/{{sort_by}}/n{{ page }}">
+         {% endif %}
+            {{ page }}
+            </a>
+      </li>
+      {% endfor %}
+   </ul>
+</div>

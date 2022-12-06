@@ -1,0 +1,21 @@
+<script>
+   let logout = () => {
+    let token = {{access_token}}
+    $.ajax({
+
+        url = `https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=58VENhxe4RuqFKX9sZ5e&client_secret=2bRVAPmnNf&access_token=${token}&service_provider=NAVER`;,
+        type : "get",
+        success : function(res){
+            let result = res.result;
+            if (result == 'success'){
+                alert('로그아웃 되셨습니다.');
+            }
+        },
+
+        // 실패했다면 다음 함수를 실행
+        error : function(){
+            alert('로그아웃 실패!');
+        }
+    });   
+}
+</script>

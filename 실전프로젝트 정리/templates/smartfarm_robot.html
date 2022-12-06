@@ -1,0 +1,80 @@
+{% extends "frm_body.html" %}
+
+{% block title %}
+  {{ smartfarm_robot["what"]}}
+{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block wrap %}
+{% include 'frm_header.html' ignore missing%}
+<div>
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item white"><a href="/">홈</a></li>
+      <li class="breadcrumb-item white"><a href="#">{{smartfarm_robot["what"]}}</a></li>
+  </ol>
+</div>
+<div class="content">
+    <div class="title_wrap">
+      <div class="title_parent">
+          <div class="first">
+            <img src="../static/img/{{smartfarm_robot['image']}}" class="left_right_trans">
+          </div>
+          <div class="second">
+            <h2 class="text-primary">{{smartfarm_robot["what"]}}</h2>
+          </div>
+          <div class="third">
+            <img src="../static/img/{{smartfarm_robot['image']}}">
+          </div>
+      </div>
+      <div class="title_info">
+        <h5>스마트팜 로봇의 정확한 위치 파악 및 통합 관리를 위한 시스템</h5>
+        <span class="text-muted">-Sprit of <b><i>봇통령</i></b></span>
+      </div>
+    </div>
+  <div class="mypage_cage">
+    {%if smartfarm_robot["what"] == "스마트팜" %}
+      {%if smartfarm_robot["list"]|length == 0 %}
+        등록된 스마트팜가 존재하지 않습니다.
+      {% else %}
+        {% for smartfarm in smartfarm_robot["list"] %}
+          <div class="card mb-3 cage" onclick="location.href='/smartfarm/sf_{{smartfarm[0]}}'">
+            <h3 class="card-header">{{smartfarm[0]}}</h3>
+            <div class="intro_img">
+              <img src="../static/img/{{smartfarm[1]}}" alt="스마트팜 설계 도면 사진">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{smartfarm[2]}}</h5>
+              <h6 class="card-subtitle text-muted">{{smartfarm[3]}}</h6>
+            </div>
+            <div class="card-footer text-muted">
+              스마트팜 정보 : {{smartfarm[4]}}
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% elif smartfarm_robot["what"] == "로봇" %}
+      {%if smartfarm_robot["list"]|length == 0 %}
+        등록된 스마트팜 로봇이 존재하지 않습니다.
+      {% else %}
+        {% for robot in smartfarm_robot["list"] %}
+          <div class="card mb-3 cage" onclick="location.href='/robot/{{robot[2]}}'">
+            <h3 class="card-header">{{robot[0]}}</h3>
+            <div class="intro_img">
+              <img src="../static/img/{{robot[1]}}" alt="{{robot[2]}} 사진">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{robot[2]}}</h5>
+              <h6 class="card-subtitle text-muted">{{robot[3]}}</h6>
+            </div>
+            <div class="card-footer text-muted">
+              로봇 정보 : {{robot[4]}}
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endif %}
+  </div>
+</div>
+{% include 'frm_footer.html' ignore missing%}
+{% endblock %}

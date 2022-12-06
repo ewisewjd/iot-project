@@ -1,0 +1,34 @@
+<div id="header">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+  <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <div class="container">
+    <a class="navbar-brand" href="/home">DCT</a>
+    <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarResponsive" data-bs-toggle="collapse" type="button">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link active" href="/home">HOME</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/set">관리 및 설정
+      </li>
+    </ul>
+    <ul class="navbar-nav ms-md-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle mypage" data-bs-toggle="dropdown" href="/mypage" role="button" aria-haspopup="true" aria-expanded="false">{{session['user_name']}}</span>님 반갑습니다.</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item my" href="/mypage">내 정보</a>
+        </div>
+      </li>
+    <li>
+      <a class="nav-link" href="javascript:logout();"><span class="badge rounded-pill bg-light"></span>로그아웃</span></a>
+    </li>
+    </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+</nav>
+</div>

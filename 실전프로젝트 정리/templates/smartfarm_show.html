@@ -1,0 +1,61 @@
+{% extends "frm_body.html" %}
+{% block title %}로봇 위치 정보{% endblock %}
+{% block head %}
+{% block src %}
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=926f082d2c2f0d7497d2efa1d0a0f752"></script>
+<script src="../static/contact.js"></script>
+{% endblock%}
+{{ super() }}
+{% endblock %}
+{% block wrap %}
+{% include 'frm_header.html' ignore missing%}
+<div>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/warehouse">스마트팜</a></li>
+    <li class="breadcrumb-item"><a href="#">{{sf_name}}</a></li>
+</ol>
+</div>
+<div class="content">
+    <div class="loc_info_wrap">
+    <div class="sf_map">
+        <h3>{{sf_state[2]}}</h3>
+        <p>특이 사항 : {{sf_state[4]}}</p>
+        <div class="sf_img">
+        {% if sf_state is defined %}
+            <img src="/static/img/{{sf_state[1]}}">
+        {% endif %}
+        </div>
+    </div>
+    <div class="sfr_list">
+        <h3>스마트팜 로봇 리스트</h3>
+        <p>{{sf_state[3]}}</p>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>모델</th>
+                    <th>상태</th>
+                </tr>
+            </thead>
+            {% for k, v in sf_state[5].items() %}
+            <tr>
+                <td>r_0{{v[0]}}</td>
+                <td>{{k}}</td>
+                {% if v[1] == "작업중" %}
+                <td class="table-success">
+                {% elif v[1] == "점검중" %}
+                <td class="table-warning">
+                {% elif v[1] == "대기중" %}
+                <td class="table-light">
+                {% else %}
+                <td>
+                {% endif %}
+                {{v[1]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+</div>
+{% include 'frm_footer.html' ignore missing%}
+{% endblock %}

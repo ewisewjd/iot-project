@@ -1,0 +1,48 @@
+{% extends "frm_body.html" %}
+{% block title %}로봇 위치 정보{% endblock %}
+{% block head %}
+{% block src %}
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=926f082d2c2f0d7497d2efa1d0a0f752"></script>
+<script src="../static/contact.js"></script>
+{% endblock%}
+{{ super() }}
+{% endblock %}
+{% block wrap %}
+{% include 'frm_header.html' ignore missing%}
+<div>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/robot">로봇</a></li>
+    <li class="breadcrumb-item"><a href="#">{{r_name}}</a></li>
+</ol>
+</div>
+<div class="content">
+    <div class="sf_map">
+        {% if r_state is defined %}
+            <img src="/static/img/smartfarm0{{r_state[2]}}.png">
+        {% else %}
+            <p> 오른쪽 로봇 리스트 중 하나를 클릭해 주세요.</p>
+        {% endif %}
+    </div>
+    <div class="wr_list">
+        <h3>스마트팜 로봇 리스트-{{r_name}}</h3>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>상태</th>
+                    <th>위치</th>
+                </tr>
+            </thead>
+            {% for robot in r_list %}
+            <tr>
+                <td>{{r_state[0]}}</td>
+                <td>{{r_state[1]}}</td>
+                <td>스마트팜{{r_state[2]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% include 'frm_footer.html' ignore missing%}
+{% endblock %}
