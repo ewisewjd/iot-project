@@ -1,0 +1,34 @@
+{% extends "frm_body.html" %}
+{% block title %}농장{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block wrap %}
+{% include 'frm_header.html' ignore missing%}
+<div>
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item white"><a href="/set">관리 및 설정</a></li>
+      <li class="breadcrumb-item white"><a href="/set/area">농장</a></li>
+  </ol>
+</div>
+<div class="content">
+  <div class="set_element">
+      {%if areas["list"]|length == 0 %}
+        등록된 농장이 존재하지 않습니다.
+      {% else %}
+        {% for area in areas["list"] %}
+          <div class="card mb-3 element" onclick="location.href='/set/area/a_{{area[0]}}'">
+            <h3 class="card-header">{{area[0]}}</h3>
+            <div class="intro_img">
+              <img src="../static/upload/{{area[1]}}" alt="스마트팜 설계 도면 사진">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">스마트팜 등록일 : {{area[2]}}</h5>
+            </div>
+          </div>
+        {% endfor %}
+    {% endif %}
+  </div>
+</div>
+{% include 'frm_footer.html' ignore missing%}
+{% endblock %}
